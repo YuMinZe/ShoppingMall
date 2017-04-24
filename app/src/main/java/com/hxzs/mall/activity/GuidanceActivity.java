@@ -1,10 +1,12 @@
-package com.hxzs.mall;
+package com.hxzs.mall.activity;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.hxzs.mall.R;
 
 public class GuidanceActivity extends AppCompatActivity {
     private Handler handler = new Handler(){
