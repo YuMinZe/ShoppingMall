@@ -1,6 +1,7 @@
 package com.hxzs.mall.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -81,13 +82,29 @@ public class MainActivity extends AppCompatActivity {
         BaseFragment baseFragment = list.get(position);
         RePlacefm(baseFragment);
     }
-
+    private Fragment mContent;
     private void RePlacefm(BaseFragment baseFragment) {
         //获得fragment的管理器
         FragmentManager fragmentManager = getSupportFragmentManager();
         //开启fragment事物
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        //替换FrameLayout布局,提交
-        transaction.replace(R.id.main_frame,baseFragment).commit();
+//        //替换FrameLayout布局,提交
+//        transaction.replace(R.id.main_frame,baseFragment).commit();
+
+        //隐藏和显示
+        if(mContent!=null){
+            //隐藏上个fragment
+            transaction.hide(mContent);
+        }
+        if(!baseFragment.isAdded()){
+            //如果还没有添加则添加fragment
+            transaction.add(R.id.main_frame,baseFragment);
+        }
+        //显示
+        transaction.show(baseFragment);
+        mContent = baseFragment;
+        //提交
+        transaction.commit();
+
     }
 }
