@@ -11,6 +11,7 @@ import com.hxzs.mall.fragment.homefragment.bean.HomeBean;
 import com.hxzs.mall.utils.Constants;
 import com.youth.banner.Banner;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,17 +23,15 @@ import java.util.List;
  */
 public class BannerViewHolder extends RecyclerView.ViewHolder {
 
-    private final Context context;
-    private final Banner mBanner;
+    public final Banner mBanner;
     private List<HomeBean.ResultBean.BannerInfoBean> mData;
     private List<String> list  =  new ArrayList();
     public BannerViewHolder(Context context, View inflate) {
         super(inflate);
-        this.context = context;
         mBanner = (Banner) inflate.findViewById(R.id.home_recycle_banner);
     }
 
-    public void setdata(List<HomeBean.ResultBean.BannerInfoBean> data) {
+    public void setdata(List<HomeBean.ResultBean.BannerInfoBean> data, final Context context) {
         this.mData = data;
         //由于数据是一个大型的数据字符串,而banner只需要这个图片的集合  所以创建一个集合把图片的yrl抽出来
         for (int i = 0; i < mData.size(); i++) {
@@ -41,8 +40,17 @@ public class BannerViewHolder extends RecyclerView.ViewHolder {
         //banner加载图片
         mBanner.setImages(list)
                 .setImageLoader(new MyImageloder())
+                //banner的动画效果
+                .setBannerAnimation(Transformer.Accordion)
                 .start();
+        mBanner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(context,""+position,Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        mBanner.setBannerAnimation(Transformer.DepthPage);
     }
+
+
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.hxzs.mall.R;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.MyRecycleGrid;
 import com.hxzs.mall.fragment.homefragment.bean.HomeBean;
+import com.hxzs.mall.interfaces.RecycleViewclick;
 import com.hxzs.mall.utils.Constants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -24,6 +25,8 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyRecycleGrid>  {
     Context context;
     List<HomeBean.ResultBean.ChannelInfoBean> data;
+    private RecycleViewclick mOnclic;
+
     public MyAdapter(Context context, List<HomeBean.ResultBean.ChannelInfoBean> data) {
         this.context = context;
         this.data = data;
@@ -39,15 +42,24 @@ public class MyAdapter extends RecyclerView.Adapter<MyRecycleGrid>  {
     }
 
     @Override
-    public void onBindViewHolder(MyRecycleGrid holder, int position) {
+    public void onBindViewHolder(MyRecycleGrid holder, final int position) {
         //赋值
         ImageLoader.getInstance().displayImage(Constants.ImageURL+data.get(position).getImage(),holder.mIv);
         holder.mTv.setText(data.get(position).getChannel_name()+"");
-
+        holder.mLl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mOnclic.clik(position);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void setonclic(RecycleViewclick onclic) {
+        mOnclic = onclic;
     }
 }

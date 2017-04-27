@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hxzs.mall.R;
 import com.hxzs.mall.fragment.homefragment.Adapter.MyAdapter;
 import com.hxzs.mall.fragment.homefragment.bean.HomeBean;
+import com.hxzs.mall.interfaces.RecycleViewclick;
 import com.hxzs.mall.utils.Constants;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -35,13 +37,18 @@ public class GridViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void setdata(List<HomeBean.ResultBean.ChannelInfoBean> channel_info, Context context) {
+    public void setdata(List<HomeBean.ResultBean.ChannelInfoBean> channel_info, final Context context) {
         //设置recycleview的布局管理器为5列
         mRecyclerView.setLayoutManager(new GridLayoutManager(context,5));
         //适配器
         MyAdapter adapter = new MyAdapter(context,channel_info);
         mRecyclerView.setAdapter(adapter);
-
+        adapter.setonclic(new RecycleViewclick() {
+            @Override
+            public void clik(int position) {
+                Toast.makeText(context,""+position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

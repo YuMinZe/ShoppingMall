@@ -3,6 +3,7 @@ package com.hxzs.mall.fragment.homefragment.ViewHolder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.hxzs.mall.R;
@@ -15,11 +16,13 @@ import com.hxzs.mall.R;
 public class MyRecycleGrid extends RecyclerView.ViewHolder {
     public  ImageView mIv;
     public  TextView mTv;
+    public final LinearLayout mLl;
 
     public MyRecycleGrid(View itemView) {
         super(itemView);
         mIv = (ImageView) itemView.findViewById(R.id.grid_item_iv);
         mTv = (TextView) itemView.findViewById(R.id.grid_item_tv);
+        mLl = (LinearLayout) itemView.findViewById(R.id.bj_ll);
     }
 
 }

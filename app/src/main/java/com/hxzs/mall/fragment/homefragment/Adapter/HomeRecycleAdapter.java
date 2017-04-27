@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import com.hxzs.mall.R;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.BannerViewHolder;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.GridViewHolder;
+import com.hxzs.mall.fragment.homefragment.ViewHolder.MaioshaViewHolder;
+import com.hxzs.mall.fragment.homefragment.ViewHolder.RexiaoViewHolder;
+import com.hxzs.mall.fragment.homefragment.ViewHolder.ViewPagerViewHoler;
 import com.hxzs.mall.fragment.homefragment.bean.HomeBean;
 
 /**
@@ -42,6 +45,12 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
             return new BannerViewHolder(context,mLayoutInflater.inflate(R.layout.home_recycle_banner,null));
         }else if(viewType == 1){
             return new GridViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_gridview,null));
+        }else if(viewType == 2){
+            return new ViewPagerViewHoler(mLayoutInflater.inflate(R.layout.home_recycle_viewpager,null));
+        }else if(viewType == 3){
+            return new MaioshaViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_miaosha,null));
+        }else if(viewType == 4){
+            return new RexiaoViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_rexiao,null));
         }
         return null;
     }
@@ -50,10 +59,19 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position) == Item1){
             BannerViewHolder bannerViewHolder = (BannerViewHolder) holder;
-            bannerViewHolder.setdata(result.getBanner_info());
+            bannerViewHolder.setdata(result.getBanner_info(),context);
         }else if(getItemViewType(position) == Item2){
             GridViewHolder gridViewHolder = (GridViewHolder) holder;
             gridViewHolder.setdata(result.getChannel_info(),context);
+        }else if(getItemViewType(position) == Item3){
+            ViewPagerViewHoler viewPagerViewHoler = (ViewPagerViewHoler) holder;
+            viewPagerViewHoler.setdata(result,context);
+        }else if(getItemViewType(position) == Item4){
+            MaioshaViewHolder maioshaViewHolder = (MaioshaViewHolder) holder;
+            maioshaViewHolder.setdata(context,result);
+        }else if(getItemViewType(position) == Item5){
+            RexiaoViewHolder rexiaoViewHolder = (RexiaoViewHolder) holder;
+            rexiaoViewHolder.setdata(context,result);
         }
     }
 
@@ -84,6 +102,6 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 5;
     }
 }
