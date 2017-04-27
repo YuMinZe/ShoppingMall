@@ -1,6 +1,8 @@
 package com.hxzs.mall.fragment.homefragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +15,8 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.hxzs.mall.R;
 import com.hxzs.mall.base.BaseFragment;
-import com.hxzs.mall.fragment.bean.HomeBean;
+import com.hxzs.mall.fragment.homefragment.Adapter.HomeRecycleAdapter;
+import com.hxzs.mall.fragment.homefragment.bean.HomeBean;
 import com.hxzs.mall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -33,6 +36,7 @@ public class HomeFragment extends BaseFragment {
     private TextView mTv_xiaoxi;
     private RecyclerView mRecycler;
     private ImageButton mImagebutton;
+    private HomeBean.ResultBean mResult;
 
     @Override
     public View initview(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -95,7 +99,6 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public void onResponse(String s, int i) {
                         Toast.makeText(mcontext,"网络请求成功",Toast.LENGTH_SHORT).show();
-                        Log.i("zzz",s);
                         //解析json数据
                         jsonjiesi(s);
                     }
@@ -103,10 +106,18 @@ public class HomeFragment extends BaseFragment {
 
     }
 
-    private void jsonjiesi(String json) {
+    public void jsonjiesi(String json) {
         //fastjaon解析数据
         HomeBean homeBean = JSON.parseObject(json, HomeBean.class);
-        HomeBean.ResultBean result = homeBean.getResult();
+        mResult = homeBean.getResult();
+        //判断 有没有数据
+        if(mResult !=null){
+            HomeRecycleAdapter adapter = new HomeRecycleAdapter(mcontext, mResult);
+            mRecycler.setLayoutManager(new GridLayoutManager(mcontext,1));
+            mRecycler.setAdapter(adapter);
+        }else{
+            Toast.makeText(mcontext,"暂无展示的数据",Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

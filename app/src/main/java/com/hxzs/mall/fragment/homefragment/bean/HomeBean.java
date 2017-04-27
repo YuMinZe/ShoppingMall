@@ -1,4 +1,4 @@
-package com.hxzs.mall.fragment.bean;
+package com.hxzs.mall.fragment.homefragment.bean;
 
 import java.util.List;
 

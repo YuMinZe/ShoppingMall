@@ -11,4 +11,7 @@ public class Constants {
 
     //数据的路径
     public static String URL = URLBASE+"/DSShop/json/HOME_URL.json";
+
+    //拼接图片路径
+    public static  String ImageURL = URLBASE+"/DSShop/img";
 }

@@ -2,6 +2,8 @@ package com.hxzs.mall.application;
 
 import android.app.Application;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.concurrent.TimeUnit;
@@ -19,6 +21,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(this).build();
+        ImageLoader.getInstance().init(config);
         //初始化okhttp的工具类
         initokhttp();
 
