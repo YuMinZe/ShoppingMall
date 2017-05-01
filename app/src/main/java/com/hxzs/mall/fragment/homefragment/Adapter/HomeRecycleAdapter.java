@@ -10,7 +10,9 @@ import com.hxzs.mall.fragment.homefragment.ViewHolder.BannerViewHolder;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.GridViewHolder;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.MaioshaViewHolder;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.RexiaoViewHolder;
+import com.hxzs.mall.fragment.homefragment.ViewHolder.TuijianViewHolder;
 import com.hxzs.mall.fragment.homefragment.ViewHolder.ViewPagerViewHoler;
+import com.hxzs.mall.fragment.homefragment.ViewHolder.XinpinViewHolder;
 import com.hxzs.mall.fragment.homefragment.bean.HomeBean;
 
 /**
@@ -30,6 +32,7 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
     private static final int Item4 = 3;
     private static final int Item5 = 4;
     private static final int Item6 = 5;
+    private static final int Item7 = 6;
     private int TYPE = 0;
 
     public HomeRecycleAdapter(Context context, HomeBean.ResultBean result) {
@@ -51,6 +54,10 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
             return new MaioshaViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_miaosha,null));
         }else if(viewType == 4){
             return new RexiaoViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_rexiao,null));
+        }else if(viewType == 5){
+            return new TuijianViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_tuijian,null));
+        }else if(viewType == 6){
+            return new XinpinViewHolder(mLayoutInflater.inflate(R.layout.home_recycle_xinpin,null));
         }
         return null;
     }
@@ -72,6 +79,12 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
         }else if(getItemViewType(position) == Item5){
             RexiaoViewHolder rexiaoViewHolder = (RexiaoViewHolder) holder;
             rexiaoViewHolder.setdata(context,result);
+        }else if(getItemViewType(position) == Item6){
+            TuijianViewHolder tuijianViewHolder = (TuijianViewHolder) holder;
+            tuijianViewHolder.setdata(context,result);
+        }else if(getItemViewType(position) == Item7){
+            XinpinViewHolder xinpinViewHolder = (XinpinViewHolder) holder;
+            xinpinViewHolder.setdata(context,result);
         }
     }
 
@@ -96,12 +109,15 @@ public class HomeRecycleAdapter extends RecyclerView.Adapter {
             case 5:
                 TYPE = Item6;
                 break;
+            case 6:
+                TYPE = Item7;
+                break;
         }
         return TYPE;
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 7;
     }
 }

@@ -23,6 +23,7 @@
             android:textSize="20sp"
             android:text="今日闪购距离结束:"/>
         <TextView
+            android:textColor="#ffffff"
             android:background="#ff0000"
             android:layout_marginRight="130dp"
             android:layout_width="0dp"

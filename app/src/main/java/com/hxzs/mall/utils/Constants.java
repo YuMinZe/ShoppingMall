@@ -9,7 +9,7 @@ public class Constants {
     //服务器路径
     public static String URLBASE = "http://169.254.227.1:8080";
 
-    //数据的路径
+    //数据的路径7794444
     public static String URL = URLBASE+"/DSShop/json/HOME_URL.json";
 
     //拼接图片路径

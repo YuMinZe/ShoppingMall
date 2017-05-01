@@ -33,6 +33,9 @@ public class BannerViewHolder extends RecyclerView.ViewHolder {
 
     public void setdata(List<HomeBean.ResultBean.BannerInfoBean> data, final Context context) {
         this.mData = data;
+        if(list!=null){
+            list.clear();
+        }
         //由于数据是一个大型的数据字符串,而banner只需要这个图片的集合  所以创建一个集合把图片的yrl抽出来
         for (int i = 0; i < mData.size(); i++) {
             list.add(Constants.ImageURL+mData.get(i).getImage());

@@ -58,6 +58,7 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
                 //使recycleview回到下标是0的位置
                 mRecycler.scrollToPosition(0);
+
             }
         });
         mTv_sousuo.setOnClickListener(new View.OnClickListener() {
